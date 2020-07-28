@@ -1,44 +1,3 @@
-const css = `
-  :root {
-    --line-height: 10px;
-    --yellow-color: #EAB543;
-    --action-color: #F8EFBA;
-  }
-  * {
-    margin: 0;
-    padding: 0;
-  }
-  body {
-    background-color: #2C3A47;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  #root {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    box-sizing: border-box;
-    font-family: 'Press Start 2P', cursive;
-    background-color: #3B3B98;
-    width: 40vw;
-    min-width: 768px;
-    height: 65vh;
-    text-align: center;
-    padding: 4rem 0;
-  }
-  .wrapperCharacter {
-    display: flex;
-    justify-content: space-evenly;
-  }
-  .character {
-    width: 130px;
-    border-radius: 50%;
-  }
-`;
-
 const injectElements = (
   element,
   reference = "root",
@@ -58,5 +17,50 @@ const createInjectStyle = (css) => {
     ? head.insertAdjacentHTML("beforeend", `<style>${estilo}</style>`)
     : null;
 };
+
+const css = `
+  :root {
+    --line-height: 10px;
+    --slider: #EAB543;
+    --action: #F8EFBA;
+    --title: #82589F;
+    --body: #2C3A47;
+    --root: #3B3B98;
+    --easy: #55E6C1;
+    --medium: #F0C808;
+    --hard: #FD7272;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background-color: var(--body);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  #root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Press Start 2P', cursive;
+    background-color: var(--root);
+    width: 40vw;
+    min-width: 768px;
+    height: 65vh;
+    min-height: 352px;
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  .character {
+    width: 130px;
+    border-radius: 50%;
+  }
+`;
 
 createInjectStyle(css);
