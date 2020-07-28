@@ -1,4 +1,4 @@
-function Character(css, path, className) {
+const Character = (css, path, className) => {
   createInjectStyle(css);
 
   return `
