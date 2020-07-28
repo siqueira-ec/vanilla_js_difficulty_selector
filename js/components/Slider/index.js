@@ -15,7 +15,7 @@ const showItems = (itemStates) => {
       list-style: none;
       width: calc(var(--line-height) * 3);
       height: calc(var(--line-height) * 3);
-      background-color: var(--yellow-color);
+      background-color: var(--slider);
       transition: transform 250ms linear;
       cursor: pointer;
     }
@@ -36,6 +36,22 @@ const showItems = (itemStates) => {
     .join("");
 };
 
+const replaceCharacter = (icon) => {
+  const parser = new DOMParser();
+
+  const { body: { firstChild: character } } = parser.parseFromString(
+    WrapperCharacter`
+      ${icon}
+      ${"selected"}
+    `,
+    "text/html"
+  );
+
+  document
+    .querySelector(".selected")
+    .replaceWith(character);
+}
+
 const handleClick = ({ target }) => {
   const allItems = document.querySelectorAll(".item");
   const action = document.querySelector(".action");
@@ -46,37 +62,14 @@ const handleClick = ({ target }) => {
   action.classList.remove("second");
   action.classList.remove("third");
 
-  const parser = new DOMParser();
-
   if (target.classList.contains("pos-2")) {
     action.classList.add("second");
-    const wrapperMedium = parser.parseFromString(
-      selectedWrapper(iconMedium),
-      "text/html"
-    );
-
-    document
-      .querySelector(".wrapperCharacter")
-      .replaceWith(wrapperMedium.body.firstChild);
+    replaceCharacter(iconMedium);
   } else if (target.classList.contains("pos-3")) {
     action.classList.add("third");
-    const wrapperHard = parser.parseFromString(
-      selectedWrapper(iconHard),
-      "text/html"
-    );
-
-    document
-      .querySelector(".wrapperCharacter")
-      .replaceWith(wrapperHard.body.firstChild);
+    replaceCharacter(iconHard);
   } else {
-    const wrapperDefault = parser.parseFromString(
-      wrapperCharacterDefault,
-      "text/html"
-    );
-
-    document
-      .querySelector(".wrapperCharacter")
-      .replaceWith(wrapperDefault.body.firstChild);
+    replaceCharacter(wrapperCharacterDefault);
   }
 };
 
@@ -87,22 +80,22 @@ const sliderAction = SliderItem`
     list-style: none;
     width: calc(var(--line-height) * 4);
     height: calc(var(--line-height) * 4);
-    background-color: var(--action-color);
+    background-color: var(--action);
     left: -5px;
     transition: transform 250ms linear;
   }
 
   .action.second {
-    transform: translateX(730%);
+    transform: translateX(730.8%);
   }
 
   .action.third {
-    transform: translateX(1460%);
+    transform: translateX(1460.8%);
   }
   ${"action"}
 `;
 
-const states = [true, false, false];
+const initialState = [true, false, false];
 const slider = Slider`
   .slider {
     position: relative;
@@ -111,11 +104,10 @@ const slider = Slider`
     justify-content: space-between;
     width: 80%;
     height: var(--line-height);
-    background-color: var(--yellow-color);
+    background-color: var(--slider);
   }
-  ${showItems(states) + sliderAction}
+  ${showItems(initialState) + sliderAction}
   ${"slider"}
 `;
 
 injectElements(slider);
-document.querySelector(".slider").id = "slider";
