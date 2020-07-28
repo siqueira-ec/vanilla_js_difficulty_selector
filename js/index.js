@@ -1,9 +1,10 @@
+const pathImages = "assets/images/";
+
 const title = Title`
   .title {
-    color: #82589F;
+    color: var(--title);
     font-size: 2rem;
     letter-spacing: 1.5px;
-    margin-bottom: 4rem;
   }
   ${"Dificuldade"}
   ${"title"}
