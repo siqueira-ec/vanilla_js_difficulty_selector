@@ -6,7 +6,7 @@ const title = Title`
     font-size: 2rem;
     letter-spacing: 1.5px;
   }
-  ${"Dificuldade"}
+  ${"Choose Your Destiny"}
   ${"title"}
 `;
 
