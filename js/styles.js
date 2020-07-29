@@ -51,8 +51,10 @@ const css = `
     background-color: var(--root);
     width: 40vw;
     min-width: 768px;
-    height: 65vh;
+    max-height: 560px;
+    height: 70vh;
     min-height: 352px;
+    max-width: 768px;
     text-align: center;
     padding-top: 4rem;
     padding-bottom: 4rem;
@@ -60,6 +62,14 @@ const css = `
   .character {
     width: 130px;
     border-radius: 50%;
+  }
+  @media (max-width: 768px) {
+    #root {
+      width: 40vw;
+      min-width: 370px;
+      height: 70vh;
+      min-height: 415px;
+    }
   }
 `;
 

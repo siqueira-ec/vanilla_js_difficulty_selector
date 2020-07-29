@@ -47,9 +47,7 @@ const replaceCharacter = (icon) => {
     "text/html"
   );
 
-  document
-    .querySelector(".selected")
-    .replaceWith(character);
+  document.querySelector(".selected").replaceWith(character);
 }
 
 const handleClick = ({ target }) => {
@@ -59,17 +57,24 @@ const handleClick = ({ target }) => {
   allItems.forEach((item) => item.classList.remove("active"));
   target.classList.contains("action") ? "" : target.classList.add("active");
 
+  action.classList.remove("first");
   action.classList.remove("second");
   action.classList.remove("third");
 
-  if (target.classList.contains("pos-2")) {
-    action.classList.add("second");
-    replaceCharacter(iconMedium);
-  } else if (target.classList.contains("pos-3")) {
-    action.classList.add("third");
-    replaceCharacter(iconHard);
-  } else {
-    replaceCharacter(wrapperCharacterDefault);
+  switch (target.classList[1]) {
+    case "pos-2":
+      action.classList.add("second");
+      replaceCharacter(iconMedium);
+      break;
+    case "pos-3":
+      action.classList.add("third");
+      replaceCharacter(iconHard);
+      break;
+    default:
+      action.classList.add("first");
+      document.querySelector(".pos-1").classList.add("active");
+      replaceCharacter(wrapperCharacterDefault);
+      break;
   }
 };
 
@@ -84,13 +89,19 @@ const sliderAction = SliderItem`
     left: -5px;
     transition: transform 250ms linear;
   }
-
   .action.second {
-    transform: translateX(730.8%);
+    transform: translateX(731%)
   }
-
   .action.third {
-    transform: translateX(1460.8%);
+    transform: translateX(1462%);
+  }
+  @media (max-width: 768px) {
+    .action.second {
+      transform: translateX(332%);
+    }
+    .action.third {
+      transform: translateX(664%);
+    }
   }
   ${"action"}
 `;
